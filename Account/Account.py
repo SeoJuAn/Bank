@@ -13,12 +13,13 @@ class Account:
     def input_money(self, input_money):
         #self.input_money = input_money
         self.money += input_money
-        print(self.money)
 
     def output_money(self, output_money):
         #self.input_money = input_money
-        self.money -= output_money
-        print(self.money)
+        if self.money < output_money :
+            print("잔액이 부족합니다.")
+        else :
+            self.money -= output_money
 
     def Account_inquiry(self):
         print('계좌정보 : '+ self.account+' / 이름 : '+self.name+' / 잔액 : '+str(self.money))
