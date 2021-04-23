@@ -11,7 +11,9 @@ while True :
         2. 입금하기
         3. 출금하기
         4. 전체조회
-        5. 종료하기
+        5. 계좌삭제
+        6. 계좌이체
+        7. 종료하기
         """
     )
     select = input()
@@ -94,10 +96,55 @@ while True :
             account_dict[i].Account_inquiry()
 
     elif select == '5':
+        acc_for_delete = input("삭제하실 계좌번호를 입력해주세요.")
+
+        if acc_for_delete not in account_dict:
+            print("존재하지 않는 계좌입니다.")
+            continue
+
+        del account_dict[acc_for_delete]
+
+    elif select == '6':
+        my_acc = input("본인 계좌를 입력해주세요.")
+        opponent_acc = input("이체할 계좌를 입력해주세요.")
+        money_for_transfer = input("이체할 금액을 입력해주세요.")
+
+        if my_acc not in account_dict or opponent_acc not in account_dict:
+            print("존재하지 않는 계좌입니다.")
+            continue
+        
+        #이체 금액 예외처리(only 숫자형만 가능)
+        try :
+            float(money_for_transfer)
+        except :
+            print("이체 금액은 반드시 숫자형으로 입력해주세요.")
+            continue
+
+        account_for_output = account_dict[my_acc]
+        account_for_input = account_dict[opponent_acc]
+
+
+        #이체 전 본인 계좌 출력
+        account_dict[my_acc].Account_inquiry()
+
+        #이체금액이 잔액보다 크거나 같다면 이체 금액만큼 상대 계좌에다 입금
+        if(account_for_output.money>=float(money_for_transfer)) :
+            account_for_input.input_money(float(money_for_transfer))
+            print("이체가 완료되었습니다.")
+
+        #이체 금액만큼 본인 계좌에서 출금
+        account_for_output.output_money(float(money_for_transfer))
+
+        #이체 후 본인 계좌 출력
+        
+        account_dict[my_acc].Account_inquiry()
+
+
+    elif select == '7':
         break
-    
+
     else :
-        print("1~5범위 내의 숫자를 선택하세요")
+        print("1~7범위 내의 숫자를 선택하세요")
         continue
 
 
