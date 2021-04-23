@@ -95,8 +95,9 @@ while True :
 
     elif select == '5':
         break
+    
     else :
-        "1~5범위 내의 숫자를 선택하세요"
+        print("1~5범위 내의 숫자를 선택하세요")
         continue
 
 
