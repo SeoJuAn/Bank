@@ -11,7 +11,8 @@ while True :
         2. 입금하기
         3. 출금하기
         4. 전체조회
-        5. 종료하기
+        5. 계좌삭제
+        6. 종료하기
         """
     )
     select = input()
@@ -94,10 +95,20 @@ while True :
             account_dict[i].Account_inquiry()
 
     elif select == '5':
+        acc_delete = input('삭제하실 계좌번호를 입력해주세요: ')
+
+        if acc_delete not in account_dict:
+            print('존재하지 않는 계좌번호입니다.')
+            continue
+
+        del account_dict[acc_delete]
+        print('계좌가 삭제되었습니다.')
+
+    elif select == '6':
         break
     
     else :
-        print("1~5범위 내의 숫자를 선택하세요")
+        print("1~6범위 내의 숫자를 선택하세요")
         continue
 
 
